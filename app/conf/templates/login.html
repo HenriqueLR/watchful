@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+	<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+	<div class="header clearfix">
+    <center><h3 class="text-muted">Watchful - Ponto Eletrônico</h3></center>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<form method="post" class='form-signin' action="{% url 'login' %}?next={{request.path}}">{% csrf_token %}
+		{% if form.errors %}
+			<div class="alert alert-error">                            
+        <a class="close" data-dismiss="alert">&times;</a>                     
+          <strong>Verifique os dados ou contate o administrador.</strong>                                        
+      </div> 
+		{% endif %}
+		<table>
+			<tr>
+				<td>Matricula</td>
+    		<td>{{ form.username }}</td>
+    	</tr>
+			<tr>
+				<td>Senha</td>
+    		<td>{{ form.password }}</td>
+    	</tr>
+    </table>
+		<center><input type="submit" value="Entrar" class='btn btn-info'/></center>
+	</form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
