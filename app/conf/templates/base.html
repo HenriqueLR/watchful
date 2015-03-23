@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Watchful{% endblock %}</title>
+    
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+
+    {% bootstrap_javascript_tag %}
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+    <div class="container">
+      {% block nav %}
+        <div class="header clearfix">
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li role="presentation"><a href="{% url 'logout' %}">sair</a></li>
+            </ul>
+          </nav>
+          <h3 class="text-muted">{{ user.first_name }} {{ user.last_name }}</h3>
+        </div>
+      {% endblock %}
+
+      {% bootstrap_messages %}
+
+      {% block content %}Empty page{% endblock %}
+
+      {% block footer %}
+        <p><hr></p>
+          <footer class="row">
+            <div class="col-md-3 col-md-offset-5">
+              <p>
+                &copy; <a href="#">Watchful</a>
+              </p>
+            </div>
+          </footer>
+      {% endblock %}
+    </div> <!-- container -->
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+	<link href="{{ STATIC_URL }}css/person.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<span class='alert-info'><h3>{{ date_current|date:'d/m/Y H:i:s' }}</h3></span>
+			<table class='table'>
+				<tr>
+					<td>Entrada</td>
+					<td>Saida</td>
+				</tr>
+				<tr>
+					{% for date_obj in obj %}
+						<td>{{ date_obj.date_entry|date:'d/m/Y H:i' }}</td>
+						<td>{{ date_obj.date_out|date:'d/m/Y H:i' }}</td>
+					{% endfor %}
+				</tr>
+			</table>
+			<a class='btn btn-info' href="/controle/ponto"/>bater ponto</a>
+	</div>
+{% endblock %}
