@@ -14,13 +14,13 @@ class ControllEmployee(models.Model):
 	'''
 
 	id_controll_employee = models.AutoField(primary_key=True, verbose_name=u'Id', db_column='id_controll_employee')
-	employee = models.OneToOneField(User, db_column='employee', related_name='employee_user', verbose_name='Colaborador')
+	employee = models.ForeignKey(User, db_column='employee', related_name='employee_user', verbose_name='Colaborador')
 	date_entry = models.DateTimeField(verbose_name='Data Entrada', db_column='date_entry', null=True)
 	date_out = models.DateTimeField(verbose_name='Data Saida', db_column='date_out', null=True)
 	date_created = models.DateTimeField(verbose_name='Data Criação', db_column='date_created', auto_now_add=True)
-	month = models.IntegerField(verbose_name='Mês', db_column='month', null=True, default=timezone.now().month)
-	year = models.IntegerField(verbose_name='Ano', db_column='year', null=True, default=timezone.now().year)
-	day =  models.IntegerField(verbose_name='Dia', db_column='day', null=True, default=timezone.now().day)
+	month = models.IntegerField(verbose_name='Mês', db_column='month', null=True, default=timezone.now().month,editable=False)
+	year = models.IntegerField(verbose_name='Ano', db_column='year', null=True, default=timezone.now().year,editable=False)
+	day =  models.IntegerField(verbose_name='Dia', db_column='day', null=True, default=timezone.now().day,editable=False)
 	description = models.CharField(verbose_name='Descrição', db_column='description', null=True, 
 				       default='Controle de ponto.',max_length=50)
 

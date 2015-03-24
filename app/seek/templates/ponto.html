@@ -19,6 +19,11 @@
 				{% endfor %}
 			</tr>
 		</table>
-		<a class='btn btn-info' href="/controle/ponto"/>bater ponto</a>
+		<form role="form" method='post' action='.'>
+			{% csrf_token %}
+			{{ form }}
+			<input type='submit' class='btn btn-info' value='bater ponto'/>
+		</form>
+		
 	</div>
 {% endblock %}
