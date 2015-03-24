@@ -1,7 +1,7 @@
 # watchful
 
 Esta aplicação simula um controle de ponto, um determinado usuário podera logar, e registrar seu ponto,
-de entrar e saida, sendo impossivel bater o ponto depois do ponto de saida, somente no dia seguinte.
+de entrada e saida, sendo impossivel bater o ponto depois do ponto de saida, somente no dia seguinte.
 
 ***
 
@@ -29,4 +29,4 @@ de entrar e saida, sendo impossivel bater o ponto depois do ponto de saida, some
 
 ### Para testar o projeto, basta acessar com suas credenciais
 
-	http://186.233.134.6
+http://186.233.134.6
