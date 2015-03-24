@@ -95,6 +95,7 @@ LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('controll')
 LOGOUT_URL = reverse_lazy('login')
 
+DATE_HOUR = '%Y-%m-%d %H:%M:%S.%f'
 DATE_FORMAT = '%d/%m/%Y'
 DATE_INPUT_FORMATS = ('%d/%m/%Y', '%Y-%m-%d')
 DATETIME_INPUT_FORMATS = ('%d/%m/%Y', '%Y-%m-%d')
