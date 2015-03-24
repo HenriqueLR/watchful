@@ -8,8 +8,6 @@ from django.views.generic import View
 from django.utils import timezone
 from core.models import ControllEmployee
 from .forms import FormsDateCurrent
-from conf.settings import DATE_HOUR
-import datetime
 
 
 
@@ -22,7 +20,7 @@ class ControllPoint(View):
 	def get(self, request, *args, **kwargs):
 		date_today = timezone.now()
 		context = {}
-		context['form'] = self.form_class(obj=date_today)
+		context['form'] = self.form_class(user=self.request.user, obj=date_today)
 		context['date_current'] = date_today
 		context['obj'] = ControllEmployee.objects.filter(employee=self.request.user,year=date_today.year,
 								 month=date_today.month,day=date_today.day)
@@ -30,19 +28,11 @@ class ControllPoint(View):
 
 	@method_decorator(login_required)
 	def post(self, request, *args, **kwargs):
-		date_today = datetime.datetime.strptime(request.POST.get("date_current", ""), DATE_HOUR)
-		obj = ControllEmployee.objects.filter(employee=request.user,year=date_today.year,
-					       	      month=date_today.month,day=date_today.day)
-
-		if obj.exists():
-			if not (obj[0].date_out and obj[0].date_entry):
-				obj.update(date_out = date_today)
-				messages.success(request, 'Ponto de saida confirmado!')
+		form = self.form_class(request.POST, user=self.request.user, obj=timezone.now())
+		if form.is_valid():
+			if form.save():
+				messages.success(request, 'Ponto confirmado!')
 			else:
-				messages.error(request, 'Não pode mais bater o ponto!')	
-		else:
-			obj = ControllEmployee(date_entry=date_today, employee=request.user)
-			obj.save()
-			messages.success(request, 'Ponto de entrada confirmado!')
-
+				messages.error(request, 'Não pode mais bater o ponto!')
+				
 		return redirect('/controle/')
