@@ -48,14 +48,14 @@ class TestViewsRoutines(TestCase):
                                     {'date_current':datetime.datetime.now()},follow=True)
         self.assertContains(
             response,
-            u'Ponto de entrada confirmado!'
+            u'Ponto confirmado!'
         )
 
         response = self.client.post('/controle/',
                                    {'date_current':datetime.datetime.now()},follow=True)
         self.assertContains(
             response,
-            u'Ponto de saida confirmado!'
+            u'Ponto confirmado!'
         )
         
         response = self.client.post('/controle/',
