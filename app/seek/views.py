@@ -14,7 +14,7 @@ from django.utils import timezone
 def add_point(request):
 	date_today = timezone.now()
 	obj = ControllEmployee.objects.filter(employee=request.user,year=date_today.year,
-										  month=date_today.month,day=date_today.day)
+					      month=date_today.month,day=date_today.day)
 	if obj.exists():
 		if not (obj[0].date_out and obj[0].date_entry):
 			obj.update(date_out = date_today)
@@ -43,5 +43,5 @@ class ControllView(TemplateView):
 		context = super(ControllView, self).get_context_data(**kwargs)
 		context['date_current'] = self.date_today
 		context['obj'] = ControllEmployee.objects.filter(employee=self.request.user,year=self.date_today.year,
-											  			 month=self.date_today.month,day=self.date_today.day)
+								 month=self.date_today.month,day=self.date_today.day)
 		return context
