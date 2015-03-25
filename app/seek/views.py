@@ -23,7 +23,7 @@ class ControllPoint(View):
 		context['form'] = self.form_class(user=self.request.user, obj=date_today)
 		context['date_current'] = date_today
 		context['obj'] = ControllEmployee.objects.filter(employee=self.request.user,year=date_today.year,
-								 month=date_today.month,day=date_today.day)
+								 							month=date_today.month,day=date_today.day)
 		return render(request, self.template_name, context)
 
 	@method_decorator(login_required)
@@ -34,5 +34,7 @@ class ControllPoint(View):
 				messages.success(request, 'Ponto confirmado!')
 			else:
 				messages.error(request, 'Não pode mais bater o ponto!')
-				
+			return redirect('/controle/')
+		messages.error(request, 'Houve um problema com as datas!')
 		return redirect('/controle/')
+
