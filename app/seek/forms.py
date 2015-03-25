@@ -23,13 +23,13 @@ class FormsDateCurrent(forms.Form):
 
 	def clean(self):
 		date_post = self.cleaned_data.get('date_current', None)
-		format = datetime.datetime.strptime(str(date_post)[:-6], DATE_HOUR)
+		format = datetime.datetime.strptime(str(date_post), DATE_HOUR)
 		if self.date.date() != format.date():
-			raise forms.ValidationError(u'A data de ontem você não pode mais bater ponto.')
+			raise forms.ValidationError(u'Houve um problema com as datas!')
 
 	def save(self):
 		obj = ControllEmployee.objects.filter(employee=self.user,year=self.date.year,
-					       	      month=self.date.month,day=self.date.day)
+					       	      				month=self.date.month,day=self.date.day)
 		if obj.exists():
 			if not (obj[0].date_out and obj[0].date_entry):
 				obj.update(date_out = self.date)

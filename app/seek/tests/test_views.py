@@ -2,7 +2,10 @@
 
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.utils import timezone
 import datetime
+from conf.settings import DATE_HOUR
+
 
 
 class TestViewsRoutines(TestCase):
@@ -45,22 +48,32 @@ class TestViewsRoutines(TestCase):
     def test_add_points(self):
         self.client.login(username='temporary', password='temporary')
         response = self.client.post('/controle/',
-                                    {'date_current':datetime.datetime.now()},follow=True)
+                                    {'date_current':timezone.now()},follow=True)
         self.assertContains(
             response,
             u'Ponto confirmado!'
         )
 
         response = self.client.post('/controle/',
-                                   {'date_current':datetime.datetime.now()},follow=True)
+                                   {'date_current':timezone.now()},follow=True)
         self.assertContains(
             response,
             u'Ponto confirmado!'
         )
         
         response = self.client.post('/controle/',
-                                   {'date_current':datetime.datetime.now()},follow=True)
+                                   {'date_current':timezone.now()},follow=True)
         self.assertContains(
             response,
             u'Não pode mais bater o ponto!'
+        )
+
+    def test_date_error(self):
+        self.client.login(username='temporary', password='temporary')
+        response = self.client.post('/controle/',
+                                    {'date_current':datetime.datetime.strptime('1999-09-09 00:53:16.594878', 
+                                                                               DATE_HOUR)},follow=True)
+        self.assertContains(
+            response,
+            u'Houve um problema com as datas!'
         )
