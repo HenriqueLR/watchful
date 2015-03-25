@@ -29,7 +29,7 @@ class FormsDateCurrent(forms.Form):
 
 	def save(self):
 		obj = ControllEmployee.objects.filter(employee=self.user,year=self.date.year,
-					       	      				month=self.date.month,day=self.date.day)
+					       	      month=self.date.month,day=self.date.day)
 		if obj.exists():
 			if not (obj[0].date_out and obj[0].date_entry):
 				obj.update(date_out = self.date)
