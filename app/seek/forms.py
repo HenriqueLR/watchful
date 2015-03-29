@@ -37,6 +37,7 @@ class FormsDateCurrent(forms.Form):
 			else:
 				return False
 		else:
-			obj = ControllEmployee(date_entry=self.date, employee=self.user)
+			obj = ControllEmployee(date_entry=self.date, employee=self.user, year=self.date.year,
+                                   		month=self.date.month, day=self.date.day)	
 			obj.save()
 			return obj
