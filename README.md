@@ -26,7 +26,3 @@ de entrada e saida, sendo impossivel bater o ponto depois do ponto de saida, som
 ```
 
 ***
-
-### Para testar o projeto, basta acessar com suas credenciais
-
-http://186.233.134.6
